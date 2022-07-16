@@ -14,7 +14,7 @@
                         </div>
                     </div>
             </form>
-            <div class="col-4 align-self-end"><?= form_error('id', '<div class="text-danger">', '</div>'); ?>
+            <div class="col-5 align-self-end">
                 <?= $this->session->flashdata('pesan'); ?>
             </div>
             <table class="table table-hover">

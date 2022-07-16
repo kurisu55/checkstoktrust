@@ -23,7 +23,7 @@ class Sales extends CI_Controller
         }
 
         // Set rules pada id
-        $this->form_validation->set_rules('id', '', 'is_unique[deal_stok.id]', ['is_unique' => 'Anda sudah melakukan deal tersebut']);
+        $this->form_validation->set_rules('id', '', 'is_unique[deal_stok.id]', ['is_unique' => '']);
 
         $data['title'] = 'View Stock';
         if ($this->form_validation->run() == false) {
