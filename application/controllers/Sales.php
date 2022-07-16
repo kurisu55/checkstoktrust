@@ -22,6 +22,9 @@ class Sales extends CI_Controller
             $data['list_PO'] = $this->M_Sales->get_platMobil();
         }
 
+        // Set rules pada id
+        $this->form_validation->set_rules('id', '', 'is_unique[deal_stok.id]', ['is_unique' => 'Anda sudah melakukan deal tersebut']);
+
         $data['title'] = 'View Stock';
         if ($this->form_validation->run() == false) {
             $this->load->view('Template/User_header', $data);
@@ -30,17 +33,20 @@ class Sales extends CI_Controller
             $this->load->view('Sales/index', $data);
             $this->load->view('Template/User_footer');
         } else {
-            $id = $this->uri->segment('3');
             $booking = 1;
-            $sales = $this->input->post('sales');
             $data = [
-                'is_booking' => $booking,
-                'sales' => $sales
+                'id'            => $this->input->post('id'),
+                'tgl_po'        => $this->input->post('tgl_po'),
+                'brand'         => $this->input->post('brand'),
+                'tipe_mobil'    => $this->input->post('tipe_mobil'),
+                'plat_mobil'    => $this->input->post('plat_mobil'),
+                'tahun'         => $this->input->post('tahun'),
+                'warna'         => $this->input->post('warna'),
+                'appraiser'     => $this->input->post('appraiser'),
+                'is_booking'    => $booking,
+                'sales'         => $this->input->post('sales'),
             ];
-            var_dump($sales);
-            die;
-            $this->db->where('id', $id);
-            $this->db->update('update_po', $data);
+            $this->db->insert('deal_stok', $data);
             $this->session->set_flashdata('pesan', '<div class="alert alert-success alert-dismissible fade show" role="alert">
             <strong>Berhasil!</strong>. Stok ini sudah <span class="text-warning">dibooking</span>.
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -86,6 +92,8 @@ class Sales extends CI_Controller
 
     public function booking()
     {
+        $this->form_validation->set_rules('id', 'Id', 'is_unique[deal_stok.id]', ['is_unique' => 'Anda sudah melakukan deal tersebut']);
+
         if ($this->form_validation->run() == true) {
             $booking = 1;
             $data = [
