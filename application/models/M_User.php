@@ -56,4 +56,23 @@ class M_User extends CI_Model
         $this->db->where('no_pegawai', $no_pegawai);
         $this->db->delete('tb_user');
     }
+
+    public function get_listPO()
+    {
+        return $this->db->get('update_po')->result_array();
+    }
+
+    public function inpuData_PO()
+    {
+        $data = [
+            'tgl_po'        => $this->input->post('tgl_po'),
+            'brand'         => $this->input->post('brand'),
+            'tipe_mobil'    => $this->input->post('tipe_mobil'),
+            'plat_mobil'    => $this->input->post('plat_mobil'),
+            'tahun'         => $this->input->post('tahun'),
+            'warna'         => $this->input->post('warna'),
+            'appraiser'     => $this->input->post('appraiser')
+        ];
+        $this->db->insert('update_po', $data);
+    }
 }
