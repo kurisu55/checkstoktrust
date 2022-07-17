@@ -5,7 +5,6 @@
     <h1 class="h3 mb-4 text-gray-800"><?= $title ?></h1>
 
     <div class="col-lg">
-        <a href="javascript:void(0);" class="btn btn-success mb-4" data-toggle="modal" data-target="#tambahData">Tambah Data</a>
         <div class="float-right">
             <?= $this->session->flashdata('pesan'); ?>
         </div>
