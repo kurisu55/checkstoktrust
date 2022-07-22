@@ -22,6 +22,9 @@ class Sales extends CI_Controller
             $data['list_PO'] = $this->M_Sales->get_platMobil();
         }
 
+        // Pengambilan data tabel dari deal_stok
+        $data['deal'] = $this->M_Sales->get_listDeal();
+
         $data['title'] = 'View Stock';
         $this->load->view('Template/User_header', $data);
         $this->load->view('Template/User_sidebar', $data);
@@ -81,6 +84,27 @@ class Sales extends CI_Controller
         }
     }
 
+    public function cancelBooking($id)
+    {
+        $cancel = 0;
+        $sold = 0;
+        $sales = '';
+        $data = [
+            'is_booking' => $cancel,
+            'is_sold' => $sold,
+            'sales' => $sales
+        ];
+        $this->db->where('id', $id);
+        $this->db->update('deal_stok', $data);
+        $this->session->set_flashdata('pesan', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Selesai!</strong>. Stok ini sudah <span class="text-danger">batal booking</span>.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+        </div>');
+        redirect('Sales');
+    }
+
     public function sold($id)
     {
         $sold = 1;
@@ -88,7 +112,7 @@ class Sales extends CI_Controller
             'is_sold' => $sold
         ];
         $this->db->where('id', $id);
-        $this->db->update('update_po', $data);
+        $this->db->update('deal_stok', $data);
         $this->session->set_flashdata('pesan', '<div class="alert alert-success alert-dismissible fade show" role="alert">
         <strong>Selesai!</strong>. Stok ini sudah terjual.
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">

@@ -50,23 +50,24 @@
                             <td id="rowBlok"><?= $l_po['warna']; ?></td>
                             <td id="rowBlok"><?= $l_po['appraiser']; ?></td>
                             <td>
-                                <form action="<?= base_url('sales/booking'); ?>" method="POST" onsubmit="if(!confirm('Ingin melakukan booking dengan tipe mobil <?= $l_po['tipe_mobil']; ?> dan plat mobil <?= $l_po['plat_mobil']; ?>?')){return false;}">
-                                    <input type="hidden" name="id" value="<?= $l_po['id']; ?>">
-                                    <input type="hidden" name="tgl_po" value="<?= $l_po['tgl_po']; ?>">
-                                    <input type="hidden" name="brand" value="<?= $l_po['brand']; ?>">
-                                    <input type="hidden" name="tipe_mobil" value="<?= $l_po['tipe_mobil']; ?>">
-                                    <input type="hidden" name="plat_mobil" value="<?= $l_po['plat_mobil']; ?>">
-                                    <input type="hidden" name="tahun" value="<?= $l_po['tahun']; ?>">
-                                    <input type="hidden" name="warna" value="<?= $l_po['warna']; ?>">
-                                    <input type="hidden" name="appraiser" value="<?= $l_po['appraiser']; ?>">
-                                    <input type="hidden" name="sales" value="<?= $user['name']; ?>">
+                                <form action="<?= base_url('sales/booking/') . $l_po['id']; ?>" method="POST" onsubmit="if(!confirm('Ingin melakukan booking dengan tipe mobil <?= $l_po['tipe_mobil']; ?> dan plat mobil <?= $l_po['plat_mobil']; ?>?')){return false;}">
                                     <button type="submit" class="badge badge-warning" style="border: none;" data-toogle="toggle" title="Tombol Booking">Booking</button>
+                                </form>
+                                <form action="<?= base_url('sales/cancelBooking/') . $l_po['id']; ?>" method="POST" onsubmit="if(!confirm('Ingin melakukan pembatalan booking dengan tipe mobil <?= $l_po['tipe_mobil']; ?> dan plat mobil <?= $l_po['plat_mobil']; ?>?')){return false;}">
+                                    <button type="submit" class="badge badge-danger" style="border: none;" data-toogle="toggle" title="Cancel">Cancel</button>
                                 </form>
                                 <form action="<?= base_url('sales/sold/'); ?><?= $l_po['id']; ?>" method="POST" onsubmit="if(!confirm('Stok yang Anda booking dinyatakan terjual?')){return false;}">
                                     <button style="border: none;" class="badge badge-success" data-toogle="toggle" title="Tombol Terjual">Terjual</button>
                                 </form>
                             </td>
-                            <td></td>
+                            <td><?php
+                                if ($deal['is_booking'] = 1) {
+                                    echo '<script></script>';
+                                } else {
+                                    echo '';
+                                }
+                                ?>
+                            </td>
                         </tr>
                         <?php $i++; ?>
                     <?php endforeach; ?>

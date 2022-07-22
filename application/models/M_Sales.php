@@ -29,19 +29,35 @@ class M_Sales extends CI_Model
 
     public function input_booking()
     {
+        $id = $this->uri->segment('3');
+
+        //  Pengambilan data untuk Sales 
+        $data['user'] = $this->db->get_where('tb_user', ['no_pegawai' =>
+        $this->session->userdata('no_pegawai')])->row_array();
+        // End
+
+        // Pengambilan data update PO ke deal stok
+        $data['deal'] = $this->db->get_where('update_po', ['id' => $id])->row_array();
+
         $booking = 1;
         $data = [
-            'id'            => htmlspecialchars($this->input->post('id')),
-            'tgl_po'        => htmlspecialchars($this->input->post('tgl_po')),
-            'brand'         => htmlspecialchars($this->input->post('brand')),
-            'tipe_mobil'    => htmlspecialchars($this->input->post('tipe_mobil')),
-            'plat_mobil'    => htmlspecialchars($this->input->post('plat_mobil')),
-            'tahun'         => htmlspecialchars($this->input->post('tahun')),
-            'warna'         => htmlspecialchars($this->input->post('warna')),
-            'appraiser'     => htmlspecialchars($this->input->post('appraiser')),
-            'is_booking'    => htmlspecialchars($booking),
-            'sales'         => htmlspecialchars($this->input->post('sales')),
+            'id'            => htmlspecialchars($data['deal']['id'], true),
+            'tgl_po'        => htmlspecialchars($data['deal']['tgl_po'], true),
+            'brand'         => htmlspecialchars($data['deal']['brand'], true),
+            'tipe_mobil'    => htmlspecialchars($data['deal']['tipe_mobil'], true),
+            'plat_mobil'    => htmlspecialchars($data['deal']['plat_mobil'], true),
+            'tahun'         => htmlspecialchars($data['deal']['tahun'], true),
+            'warna'         => htmlspecialchars($data['deal']['warna'], true),
+            'appraiser'     => htmlspecialchars($data['deal']['appraiser'], true),
+            'is_booking'    => htmlspecialchars($booking, true),
+            'sales'         => htmlspecialchars($data['user']['name'], true),
         ];
         $this->db->insert('deal_stok', $data);
+    }
+
+    public function get_listDeal()
+    {
+        $this->db->select('*');
+        return $this->db->get('deal_stok')->result_array();
     }
 }
