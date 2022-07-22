@@ -26,4 +26,22 @@ class M_Sales extends CI_Model
         $this->db->like('plat_mobil', $keyword);
         return $this->db->get()->result_array();
     }
+
+    public function input_booking()
+    {
+        $booking = 1;
+        $data = [
+            'id'            => htmlspecialchars($this->input->post('id')),
+            'tgl_po'        => htmlspecialchars($this->input->post('tgl_po')),
+            'brand'         => htmlspecialchars($this->input->post('brand')),
+            'tipe_mobil'    => htmlspecialchars($this->input->post('tipe_mobil')),
+            'plat_mobil'    => htmlspecialchars($this->input->post('plat_mobil')),
+            'tahun'         => htmlspecialchars($this->input->post('tahun')),
+            'warna'         => htmlspecialchars($this->input->post('warna')),
+            'appraiser'     => htmlspecialchars($this->input->post('appraiser')),
+            'is_booking'    => htmlspecialchars($booking),
+            'sales'         => htmlspecialchars($this->input->post('sales')),
+        ];
+        $this->db->insert('deal_stok', $data);
+    }
 }

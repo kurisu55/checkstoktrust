@@ -22,39 +22,12 @@ class Sales extends CI_Controller
             $data['list_PO'] = $this->M_Sales->get_platMobil();
         }
 
-        // Set rules pada id
-        $this->form_validation->set_rules('id', '', 'is_unique[deal_stok.id]', ['is_unique' => '']);
-
         $data['title'] = 'View Stock';
-        if ($this->form_validation->run() == false) {
-            $this->load->view('Template/User_header', $data);
-            $this->load->view('Template/User_sidebar', $data);
-            $this->load->view('Template/User_topbar', $data);
-            $this->load->view('Sales/index', $data);
-            $this->load->view('Template/User_footer');
-        } else {
-            $booking = 1;
-            $data = [
-                'id'            => $this->input->post('id'),
-                'tgl_po'        => $this->input->post('tgl_po'),
-                'brand'         => $this->input->post('brand'),
-                'tipe_mobil'    => $this->input->post('tipe_mobil'),
-                'plat_mobil'    => $this->input->post('plat_mobil'),
-                'tahun'         => $this->input->post('tahun'),
-                'warna'         => $this->input->post('warna'),
-                'appraiser'     => $this->input->post('appraiser'),
-                'is_booking'    => $booking,
-                'sales'         => $this->input->post('sales'),
-            ];
-            $this->db->insert('deal_stok', $data);
-            $this->session->set_flashdata('pesan', '<div class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong>Berhasil!</strong>. Stok ini sudah <span class="text-warning">dibooking</span>.
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
-            </div>');
-            redirect('Sales');
-        }
+        $this->load->view('Template/User_header', $data);
+        $this->load->view('Template/User_sidebar', $data);
+        $this->load->view('Template/User_topbar', $data);
+        $this->load->view('Sales/index', $data);
+        $this->load->view('Template/User_footer');
     }
 
     public function profile()
@@ -81,7 +54,7 @@ class Sales extends CI_Controller
 
         $data['list_PO'] = $this->M_Sales->getList_comingSoon();
 
-        $data['title'] = 'View Stok Coming Soon';
+        $data['title'] = 'View Stock Coming Soon';
 
         $this->load->view('Template/User_header', $data);
         $this->load->view('Template/User_sidebar', $data);
@@ -94,21 +67,10 @@ class Sales extends CI_Controller
     {
         $this->form_validation->set_rules('id', 'Id', 'is_unique[deal_stok.id]', ['is_unique' => 'Anda sudah melakukan deal tersebut']);
 
-        if ($this->form_validation->run() == true) {
-            $booking = 1;
-            $data = [
-                'id'            => $this->input->post('id'),
-                'tgl_po'        => $this->input->post('tgl_po'),
-                'brand'         => $this->input->post('brand'),
-                'tipe_mobil'    => $this->input->post('tipe_mobil'),
-                'plat_mobil'    => $this->input->post('plat_mobil'),
-                'tahun'         => $this->input->post('tahun'),
-                'warna'         => $this->input->post('warna'),
-                'appraiser'     => $this->input->post('appraiser'),
-                'is_booking'    => $booking,
-                'sales'         => $this->input->post('sales'),
-            ];
-            $this->db->insert('deal_stok', $data);
+        if ($this->form_validation->run() == false) {
+            redirect('Sales');
+        } else {
+            $this->M_Sales->input_booking();
             $this->session->set_flashdata('pesan', '<div class="alert alert-success alert-dismissible fade show" role="alert">
             <strong>Berhasil!</strong>. Stok ini sudah <span class="text-warning">dibooking</span>.
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">

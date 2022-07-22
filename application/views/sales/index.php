@@ -50,7 +50,7 @@
                             <td id="rowBlok"><?= $l_po['warna']; ?></td>
                             <td id="rowBlok"><?= $l_po['appraiser']; ?></td>
                             <td>
-                                <form action="<?= base_url('sales'); ?>" method="POST" onsubmit="if(!confirm('Ingin melakukan booking dengan tipe mobil <?= $l_po['tipe_mobil']; ?> dan plat mobil <?= $l_po['plat_mobil']; ?>?')){return false;}">
+                                <form action="<?= base_url('sales/booking'); ?>" method="POST" onsubmit="if(!confirm('Ingin melakukan booking dengan tipe mobil <?= $l_po['tipe_mobil']; ?> dan plat mobil <?= $l_po['plat_mobil']; ?>?')){return false;}">
                                     <input type="hidden" name="id" value="<?= $l_po['id']; ?>">
                                     <input type="hidden" name="tgl_po" value="<?= $l_po['tgl_po']; ?>">
                                     <input type="hidden" name="brand" value="<?= $l_po['brand']; ?>">
