@@ -28,7 +28,7 @@ class Admin extends CI_Controller
         $this->form_validation->set_rules('appraiser', 'Appraiser harus diisi', 'required');
 
         $data['list_PO'] = $this->M_User->get_listPO();
-        $data['title'] = 'Buat PO';
+        $data['title'] = 'Buat Purchase Order';
         if ($this->form_validation->run() == false) {
             $this->load->view('Template/User_header', $data);
             $this->load->view('Template/User_sidebar', $data);
