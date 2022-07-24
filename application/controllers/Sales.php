@@ -68,10 +68,9 @@ class Sales extends CI_Controller
 
     public function booking()
     {
-        $this->form_validation->set_rules('id', 'Id', 'is_unique[deal_stok.id]', ['is_unique' => 'Anda sudah melakukan deal tersebut']);
-
+        $this->form_validation->set_rules('id', '', 'required|is_unique[deal_stok.id]');
         if ($this->form_validation->run() == false) {
-            redirect('Sales');
+            $this->index();
         } else {
             $this->M_Sales->input_booking();
             $this->session->set_flashdata('pesan', '<div class="alert alert-success alert-dismissible fade show" role="alert">

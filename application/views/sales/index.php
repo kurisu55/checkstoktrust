@@ -15,12 +15,15 @@
                     </div>
             </form>
             <div class="col-5 align-self-end">
+                <?= form_error('plat_mobil', '<div class="small alert-danger form-text text-muted">', '</div>'); ?>
+
                 <?= $this->session->flashdata('pesan'); ?>
             </div>
             <table class="table table-hover">
                 <thead>
                     <tr>
                         <th scope="col">#</th>
+                        <th scope="col">Kode PO</th>
                         <th scope="col">Tanggal PO</th>
                         <th scope="col">Brand</th>
                         <th scope="col">Tipe Mobil</th>
@@ -42,6 +45,7 @@
                     <?php foreach ($list_PO as $l_po) : ?>
                         <tr>
                             <th scope="row"><?= $i; ?></th>
+                            <td id="rowBlok"><?= $l_po['kode_po']; ?></td>
                             <td id="rowBlok"><?= $l_po['tgl_po']; ?></td>
                             <td id="rowBlok"><?= $l_po['brand']; ?></td>
                             <td id="rowBlok"><?= $l_po['tipe_mobil']; ?></td>
@@ -60,13 +64,8 @@
                                     <button style="border: none;" class="badge badge-success" data-toogle="toggle" title="Tombol Terjual">Terjual</button>
                                 </form>
                             </td>
-                            <td><?php
-                                if ($deal['is_booking'] = 1) {
-                                    echo '<script></script>';
-                                } else {
-                                    echo '';
-                                }
-                                ?>
+                            <td>
+
                             </td>
                         </tr>
                         <?php $i++; ?>

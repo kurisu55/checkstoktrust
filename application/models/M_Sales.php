@@ -29,6 +29,8 @@ class M_Sales extends CI_Model
 
     public function input_booking()
     {
+        $this->form_validation->set_rules('plat_mobil', 'Plat Mobil', 'is_unique[deal_stok.plat_mobil]', ['is_unique' => 'Anda sudah melakukan deal tersebut']);
+
         $id = $this->uri->segment('3');
 
         //  Pengambilan data untuk Sales 
@@ -42,6 +44,7 @@ class M_Sales extends CI_Model
         $booking = 1;
         $data = [
             'id'            => htmlspecialchars($data['deal']['id'], true),
+            'kode_po'       => htmlspecialchars($data['deal']['kode_po'], true),
             'tgl_po'        => htmlspecialchars($data['deal']['tgl_po'], true),
             'brand'         => htmlspecialchars($data['deal']['brand'], true),
             'tipe_mobil'    => htmlspecialchars($data['deal']['tipe_mobil'], true),
