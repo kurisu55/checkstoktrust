@@ -4,7 +4,7 @@
             <div class="card-body p-0">
                 <div class="col-lg">
                     <div class="p-5">
-                        <div class=" text-center">
+                        <div class="text-center">
                             <h1 class="h4 text-gray-900 mb-4">Registrasi</h1>
                         </div>
                         <form class="user" action="<?= base_url('auth/registration/') ?>" method="post">
@@ -36,13 +36,8 @@
                                 Registrasi Akun
                             </button>
                         </form>
-                        <div class="row justify-content-between mt-3">
-                            <div class="col-md-7">
-                                <a class="small" href="<?= base_url('auth/forgot_password') ?>">Lupa Password?</a>
-                            </div>
-                            <div class="col-md-5">
-                                <a class="small" href="<?= base_url('auth') ?>">Login bila memiliki akun!</a>
-                            </div>
+                        <div class="mt-3 text-center">
+                            <a class="small" href="<?= base_url('auth') ?>">Login bila memiliki akun!</a>
                         </div>
                     </div>
                 </div>
