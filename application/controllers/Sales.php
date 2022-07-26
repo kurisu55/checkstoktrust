@@ -17,13 +17,12 @@ class Sales extends CI_Controller
         $this->session->userdata('no_pegawai')])->row_array();
         /** End */
 
-        $data['list_PO'] = $this->M_Sales->get_listPO();
-        if ($this->input->post('keyword')) {
-            $data['list_PO'] = $this->M_Sales->get_platMobil();
-        }
-
         // Pengambilan data tabel dari deal_stok
         $data['deal'] = $this->M_Sales->get_listDeal();
+
+        if ($this->input->post('keyword')) {
+            $data['deal'] = $this->M_Sales->get_platMobil();
+        }
 
         $data['title'] = 'View Stock';
         $this->load->view('Template/User_header', $data);
@@ -66,21 +65,29 @@ class Sales extends CI_Controller
         $this->load->view('Template/User_footer');
     }
 
-    public function booking()
+    public function booking($id)
     {
-        $this->form_validation->set_rules('id', '', 'required|is_unique[deal_stok.id]');
-        if ($this->form_validation->run() == false) {
-            $this->index();
-        } else {
-            $this->M_Sales->input_booking();
-            $this->session->set_flashdata('pesan', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+        $id = $this->uri->segment('3');
+
+        //  Pengambilan data untuk Sales 
+        $data['user'] = $this->db->get_where('tb_user', ['no_pegawai' =>
+        $this->session->userdata('no_pegawai')])->row_array();
+        // End
+
+        $booking = 1;
+        $data = [
+            'is_booking'    => htmlspecialchars($booking, true),
+            'sales'         => htmlspecialchars($data['user']['name'], true),
+        ];
+        $this->db->where('id', $id);
+        $this->db->update('deal_stok', $data);
+        $this->session->set_flashdata('pesan', '<div class="alert alert-success alert-dismissible fade show" role="alert">
             <strong>Berhasil!</strong>. Stok ini sudah <span class="text-warning">dibooking</span>.
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>
             </div>');
-            redirect('Sales');
-        }
+        redirect('Sales');
     }
 
     public function cancelBooking($id)

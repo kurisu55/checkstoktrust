@@ -4,11 +4,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class M_Sales extends CI_Model
 {
 
-    public function get_listPO()
+    public function get_listDeal()
     {
-        $isConfirm = '1';
-        $this->db->where('is_confirm', $isConfirm);
-        return $this->db->get('update_po')->result_array();
+        $this->db->select('*');
+        return $this->db->get('deal_stok')->result_array();
     }
 
     public function getList_comingSoon()
@@ -22,14 +21,13 @@ class M_Sales extends CI_Model
     {
         $keyword = $this->input->post('keyword', true);
         $this->db->select('*');
-        $this->db->from('update_po');
+        $this->db->from('deal_stok');
         $this->db->like('plat_mobil', $keyword);
         return $this->db->get()->result_array();
     }
 
     public function input_booking()
     {
-        $this->form_validation->set_rules('plat_mobil', 'Plat Mobil', 'is_unique[deal_stok.plat_mobil]', ['is_unique' => 'Anda sudah melakukan deal tersebut']);
 
         $id = $this->uri->segment('3');
 
@@ -38,29 +36,12 @@ class M_Sales extends CI_Model
         $this->session->userdata('no_pegawai')])->row_array();
         // End
 
-        // Pengambilan data update PO ke deal stok
-        $data['deal'] = $this->db->get_where('update_po', ['id' => $id])->row_array();
-
         $booking = 1;
         $data = [
-            'id'            => htmlspecialchars($data['deal']['id'], true),
-            'kode_po'       => htmlspecialchars($data['deal']['kode_po'], true),
-            'tgl_po'        => htmlspecialchars($data['deal']['tgl_po'], true),
-            'brand'         => htmlspecialchars($data['deal']['brand'], true),
-            'tipe_mobil'    => htmlspecialchars($data['deal']['tipe_mobil'], true),
-            'plat_mobil'    => htmlspecialchars($data['deal']['plat_mobil'], true),
-            'tahun'         => htmlspecialchars($data['deal']['tahun'], true),
-            'warna'         => htmlspecialchars($data['deal']['warna'], true),
-            'appraiser'     => htmlspecialchars($data['deal']['appraiser'], true),
             'is_booking'    => htmlspecialchars($booking, true),
             'sales'         => htmlspecialchars($data['user']['name'], true),
         ];
-        $this->db->insert('deal_stok', $data);
-    }
-
-    public function get_listDeal()
-    {
-        $this->db->select('*');
-        return $this->db->get('deal_stok')->result_array();
+        $this->db->where('id', $id);
+        $this->db->iupdate('deal_stok', $data);
     }
 }
