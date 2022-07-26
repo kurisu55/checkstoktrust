@@ -17,15 +17,6 @@ class Tnt extends CI_Controller
         $this->session->userdata('no_pegawai')])->row_array();
         /** End */
 
-        // Set rules pada input list PO
-        $this->form_validation->set_rules('tgl_po', 'Tanggal Purchase harus diisi', 'required');
-        $this->form_validation->set_rules('brand', 'Brand harus diisi', 'required');
-        $this->form_validation->set_rules('tipe_mobil', 'Tipe mobil harus diisi', 'required');
-        $this->form_validation->set_rules('plat_mobil', 'Plat mobil harus diisi', 'required|is_unique.kode_po]');
-        $this->form_validation->set_rules('tahun', 'Tahun harus diisi', 'required');
-        $this->form_validation->set_rules('warna', 'Warna harus diisi', 'required');
-        $this->form_validation->set_rules('appraiser', 'Appraiser harus diisi', 'required');
-
         $data['list_PO'] = $this->M_Tnt->get_listPO();
 
         $data['title'] = 'Update PO';
@@ -64,12 +55,10 @@ class Tnt extends CI_Controller
 
     public function confirm_PO($id)
     {
-
-        $this->form_validation->set_rules('is_confirm', '', 'required|is_unique[update_po.is_confirm]');
-
-        if ($this->form_validation->run() == false) {
+        if ($this->form_validation->run() == true) {
             $this->index();
         } else {
+            $this->_input_stok();
             $kode_po = $this->M_Tnt->kode_po();
             $data = [
                 'is_confirm' => '1',
@@ -85,5 +74,25 @@ class Tnt extends CI_Controller
                 </div>');
             redirect('Tnt');
         }
+    }
+    private function _input_stok()
+    {
+        $id = $this->uri->segment('3');
+
+        // Pengambilan data update PO ke deal stok
+        $data['deal'] = $this->db->get_where('update_po', ['id' => $id])->row_array();
+
+        $data = [
+            'id'            => htmlspecialchars($data['deal']['id'], true),
+            'kode_po'       => htmlspecialchars($data['deal']['kode_po'], true),
+            'tgl_po'        => htmlspecialchars($data['deal']['tgl_po'], true),
+            'brand'         => htmlspecialchars($data['deal']['brand'], true),
+            'tipe_mobil'    => htmlspecialchars($data['deal']['tipe_mobil'], true),
+            'plat_mobil'    => htmlspecialchars($data['deal']['plat_mobil'], true),
+            'tahun'         => htmlspecialchars($data['deal']['tahun'], true),
+            'warna'         => htmlspecialchars($data['deal']['warna'], true),
+            'appraiser'     => htmlspecialchars($data['deal']['appraiser'], true),
+        ];
+        $this->db->insert('deal_stok', $data);
     }
 }

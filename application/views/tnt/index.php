@@ -35,7 +35,7 @@
                         <td><?= $l_po['warna']; ?></td>
                         <td><?= $l_po['appraiser']; ?></td>
                         <td>
-                            <form action="<?= base_url('Tnt/confirm_PO/') ?><?= $l_po['id']; ?>" method="post" onsubmit="if(!confirm('Ingin mengirim PO ke Sales dengan tipe mobil <?= $l_po['tipe_mobil']; ?> dan plat mobil <?= $l_po['plat_mobil']; ?>?')){return false;}">
+                            <form action="<?= base_url('Tnt/confirm_PO/') . $l_po['id']; ?>" method="post" onsubmit="if(!confirm('Ingin mengirim PO ke Sales dengan tipe mobil <?= $l_po['tipe_mobil']; ?> dan plat mobil <?= $l_po['plat_mobil']; ?>?')){return false;}">
                                 <button type="submit" class="badge badge-success" style="border: none;">Deal</button>
                             </form>
                             <form action="<?= base_url('tnt/delete_po/'); ?><?= $l_po['id']; ?>" method="POST" onsubmit="if(!confirm('Ingin menghapus PO dengan tipe mobil <?= $l_po['tipe_mobil']; ?> dan plat mobil <?= $l_po['plat_mobil']; ?>?')){return false;}">

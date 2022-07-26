@@ -11,7 +11,7 @@ class M_Tnt extends CI_Model
 
     public function kode_po()
     {
-        $this->db->select('RIGHT(update_po.kode_po,5) as kode_po', FALSE);
+        $this->db->select('RIGHT(update_po.kode_po,2) as kode_po', FALSE);
         $this->db->order_by('kode_po', 'DESC');
         $this->db->limit(1);
         $query = $this->db->get('update_po');
