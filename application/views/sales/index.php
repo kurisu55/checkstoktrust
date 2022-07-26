@@ -51,15 +51,21 @@
                             <td id="rowBlok"><?= $d['tahun']; ?></td>
                             <td id="rowBlok"><?= $d['warna']; ?></td>
                             <td id="rowBlok"><?= $d['appraiser']; ?></td>
-                            <td id="status">
-                                <a href="<?= base_url('sales/booking/') . $d['id']; ?>" class="badge badge-warning" onclick="if(!confirm('Ingin melakukan booking dengan tipe mobil <?= $d['tipe_mobil']; ?> dan plat mobil <?= $d['plat_mobil']; ?>?')){return false;}">Booking</a>
-                                <a href="<?= base_url('sales/cancelBooking/') . $d['id']; ?>" class="badge badge-danger" onsubmit="if(!confirm('Ingin melakukan pembatalan booking dengan tipe mobil <?= $d['tipe_mobil']; ?> dan plat mobil <?= $d['plat_mobil']; ?>?')){return false;}">Cancel</a>
-                                <a href="<?= base_url('sales/sold/'); ?><?= $d['id']; ?>" class="badge badge-success" onsubmit="if(!confirm('Stok yang Anda booking dinyatakan terjual?')){return false;}">Terjual</a>
-                            </td>
                             <td>
+                                <a href="<?= base_url('sales/booking/') . $d['id']; ?>" id="booking" class="badge badge-warning" onclick="if(!confirm('Ingin melakukan booking dengan tipe mobil <?= $d['tipe_mobil']; ?> dan plat mobil <?= $d['plat_mobil']; ?>?')){return false;}">Booking</a>
+                                <a href="<?= base_url('sales/cancelBooking/') . $d['id']; ?>" id="cancel" class="badge badge-danger" onclick="if(!confirm('Ingin melakukan pembatalan booking dengan tipe mobil <?= $d['tipe_mobil']; ?> dan plat mobil <?= $d['plat_mobil']; ?>?')){return false;}">Cancel</a>
+                                <a href="<?= base_url('sales/sold/'); ?><?= $d['id']; ?>" id="terjual" class="badge badge-success" onclick="if(!confirm('Stok yang Anda booking dinyatakan terjual?')){return false;}">Terjual</a>
+                            </td>
+                            <td id="status">
                                 <?php
-                                if (!empty($d['sales'])) {
-                                    echo "<span class='bg-warning'>Sudah dibooking oleh sales<span class='text-white'>" . $d['sales'] . "</span></span>";
+                                if ($d['is_sold'] == 1 && $d['is_booking']) {
+                                    echo "<span class='text-white'>Stok sudah terjual</span>";
+                                    echo "<script>var i = '#1cc88a'</script>";
+                                    echo "<script>document.getElementById('status').style.backgroundColor = i ;</script>";
+                                } elseif ($d['is_booking'] == 1) {
+                                    echo "<span class='text-white'>Sudah dibooking oleh sales " . $d['sales'] . "</span>";
+                                    echo "<script>var i = '#f6c23e'</script>";
+                                    echo "<script>document.getElementById('status').style.backgroundColor = i ;</script>";
                                 }
                                 ?>
                             </td>
