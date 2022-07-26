@@ -23,6 +23,7 @@
                         <?php endforeach; ?>
                     </select>
                 </div>
+                <?php /* 
                 <div class="form-group">
                     <label for="region">Region : </label>
                     <select class="form-control" name="region">
@@ -35,6 +36,8 @@
                         <?php endforeach; ?>
                     </select>
                 </div>
+                */
+                ?>
                 <div class="form-group">
                     <label for="no_telp">No. Telepon</label>
                     <input type="text" class="form-control" name="no_telp" value="<?= $daftar_user['no_telp']; ?>">
