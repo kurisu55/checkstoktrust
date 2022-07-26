@@ -30,7 +30,7 @@
                         <th scope="col">Warna</th>
                         <th scope="col">Appraiser</th>
                         <th scope="col">Action</th>
-                        <th scope="col">Status</th>
+                        <th scope="col" class="text-center">Status</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -43,30 +43,30 @@
                     <?php foreach ($deal as $d) : ?>
                         <tr>
                             <th scope="row"><?= $i; ?></th>
-                            <td id="rowBlok"><?= $d['kode_po']; ?></td>
-                            <td id="rowBlok"><?= $d['tgl_po']; ?></td>
-                            <td id="rowBlok"><?= $d['brand']; ?></td>
-                            <td id="rowBlok"><?= $d['tipe_mobil']; ?></td>
-                            <td id="rowBlok"><?= $d['plat_mobil']; ?></td>
-                            <td id="rowBlok"><?= $d['tahun']; ?></td>
-                            <td id="rowBlok"><?= $d['warna']; ?></td>
-                            <td id="rowBlok"><?= $d['appraiser']; ?></td>
+                            <td><?= $d['kode_po']; ?></td>
+                            <td><?= $d['tgl_po']; ?></td>
+                            <td><?= $d['brand']; ?></td>
+                            <td><?= $d['tipe_mobil']; ?></td>
+                            <td><?= $d['plat_mobil']; ?></td>
+                            <td><?= $d['tahun']; ?></td>
+                            <td><?= $d['warna']; ?></td>
+                            <td><?= $d['appraiser']; ?></td>
                             <td>
                                 <div class="row">
-                                    <a href="<?= base_url('sales/booking/') . $d['id']; ?>" id="booking" class="badge badge-warning mb-1" onclick="if(!confirm('Ingin melakukan booking dengan tipe mobil <?= $d['tipe_mobil']; ?> dan plat mobil <?= $d['plat_mobil']; ?>?')){return false;}">Booking</a>
+                                    <a href="<?= base_url('sales/booking/') . $d['id']; ?>" id="booking" class="badge badge-warning mb-1" data-toggle="toggle" title="Booking" onclick="if(!confirm('Ingin melakukan booking dengan tipe mobil <?= $d['tipe_mobil']; ?> dan plat mobil <?= $d['plat_mobil']; ?>?')){return false;}">Booking</a>
                                 </div>
                                 <div class="row">
-                                    <a href="<?= base_url('sales/cancelBooking/') . $d['id']; ?>" id="cancel" class="badge badge-danger mb-1" onclick="if(!confirm('Ingin melakukan pembatalan booking dengan tipe mobil <?= $d['tipe_mobil']; ?> dan plat mobil <?= $d['plat_mobil']; ?>?')){return false;}">Cancel</a>
+                                    <a href="<?= base_url('sales/cancelBooking/') . $d['id']; ?>" id="cancel" class="badge badge-danger mb-1" data-toggle="toggle" title="Cancel" onclick="if(!confirm('Ingin melakukan pembatalan booking dengan tipe mobil <?= $d['tipe_mobil']; ?> dan plat mobil <?= $d['plat_mobil']; ?>?')){return false;}">Cancel</a>
                                 </div>
                                 <div class="row">
-                                    <a href="<?= base_url('sales/sold/'); ?><?= $d['id']; ?>" id="terjual" class="badge badge-success" onclick="if(!confirm('Stok yang Anda booking dinyatakan terjual?')){return false;}">Terjual</a>
+                                    <a href="<?= base_url('sales/sold/'); ?><?= $d['id']; ?>" id="terjual" class="badge badge-success" data-toggle="toggle" title="Terjual" onclick="if(!confirm('Stok yang Anda booking dinyatakan terjual?')){return false;}">Terjual</a>
                                 </div>
                             </td>
                             <?php
                             if ($d['is_sold'] == 1 && $d['is_booking'] == 1) {
                                 echo "<td style='background-color:#1cc88a;'><span class='text-white'>Stok sudah terjual</span>";
                             } elseif ($d['is_booking'] == 1) {
-                                echo "<td style='background-color:#f6c23e;'><span class='text-white'>Sudah dibooking sales " . $d['sales'] . "</span>";
+                                echo "<td style='background-color:#f6c23e;'><span class='text-white'>Sudah dibooking sales <u>" . $d['sales'] . "</u></span>";
                             }
                             ?>
                             </td>
