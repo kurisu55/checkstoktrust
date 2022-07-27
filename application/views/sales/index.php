@@ -52,21 +52,21 @@
                             <td><?= $d['warna']; ?></td>
                             <td><?= $d['appraiser']; ?></td>
                             <td>
-                                <div class="row">
-                                    <a href="<?= base_url('sales/booking/') . $d['id']; ?>" id="booking" class="badge badge-warning mb-1" data-toggle="toggle" title="Booking" onclick="if(!confirm('Ingin melakukan booking dengan tipe mobil <?= $d['tipe_mobil']; ?> dan plat mobil <?= $d['plat_mobil']; ?>?')){return false;}">Booking</a>
-                                </div>
-                                <div class="row">
-                                    <a href="<?= base_url('sales/cancelBooking/') . $d['id']; ?>" id="cancel" class="badge badge-danger mb-1" data-toggle="toggle" title="Cancel" onclick="if(!confirm('Ingin melakukan pembatalan booking dengan tipe mobil <?= $d['tipe_mobil']; ?> dan plat mobil <?= $d['plat_mobil']; ?>?')){return false;}">Cancel</a>
-                                </div>
-                                <div class="row">
-                                    <a href="<?= base_url('sales/sold/'); ?><?= $d['id']; ?>" id="terjual" class="badge badge-success" data-toggle="toggle" title="Terjual" onclick="if(!confirm('Stok yang Anda booking dinyatakan terjual?')){return false;}">Terjual</a>
-                                </div>
+                                <form action="<?= base_url('sales/booking/') . $d['id']; ?>" onsubmit="if(!confirm('Ingin melakukan booking dengan tipe mobil <?= $d['tipe_mobil']; ?> dan plat mobil <?= $d['plat_mobil']; ?>?')){return false;}">
+                                    <button type="submit" id="booking" class="badge badge-warning" data-toggle="toggle" title="Booking" style="border: none;">Booking</button>
+                                </form>
+                                <form action="<?= base_url('sales/cancelBooking/') . $d['id']; ?>" onsubmit="if(!confirm('Ingin melakukan pembatalan booking dengan tipe mobil <?= $d['tipe_mobil']; ?> dan plat mobil <?= $d['plat_mobil']; ?>?')){return false;}">
+                                    <button type="submit" id="cancel" class="badge badge-danger" data-toggle="toggle" title="Cancel" style="border: none;">Cancel</button>
+                                </form>
+                                <form action="<?= base_url('sales/sold/') . $d['id']; ?>" onsubmit="if(!confirm('Stok yang Anda booking dinyatakan terjual?')){return false;}">
+                                    <button type="submit" id="terjual" class="badge badge-success" data-toggle="toggle" title="Terjual" style="border: none;">Terjual</button>
+                                </form>
                             </td>
                             <?php
                             if ($d['is_sold'] == 1 && $d['is_booking'] == 1) {
-                                echo "<td style='background-color:#1cc88a;'><span class='text-white'>Stok sudah terjual</span>";
+                                echo "<td class='bg-success'><span class='text-white'>Stok sudah terjual</span>";
                             } elseif ($d['is_booking'] == 1) {
-                                echo "<td style='background-color:#f6c23e;'><span class='text-white'>Sudah dibooking sales <u>" . $d['sales'] . "</u></span>";
+                                echo "<td class='bg-warning'><span class='text-white'>Sudah dibooking sales <u>" . $d['sales'] . "</u></span>";
                             }
                             ?>
                             </td>
