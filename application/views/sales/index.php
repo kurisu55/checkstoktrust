@@ -55,7 +55,7 @@
                                 <form action="<?= base_url('sales/booking/') . $d['id']; ?>" onsubmit="if(!confirm('Ingin melakukan booking dengan tipe mobil <?= $d['tipe_mobil']; ?> dan plat mobil <?= $d['plat_mobil']; ?>?')){return false;}">
                                     <?php if ($d['is_booking'] == 1 && $d['is_sold'] == 1) {
                                         echo "<button type='submit' id='booking' class='badge badge-warning' data-toggle='toggle' title='Booking' style='border: none;' hidden>Booking</button>"
-                                            . "<span class='text-white bg-info'>Clear</span>";
+                                            . "<span class='alert alert-primary rounded mt-5'>Clear</span>";
                                     } elseif ($d['is_booking'] == 0) {
                                         echo "<button type='submit' id='booking' class='badge badge-warning' data-toggle='toggle' title='Booking' style='border: none;'>Booking</button>";
                                     }

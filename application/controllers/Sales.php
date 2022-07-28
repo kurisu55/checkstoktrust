@@ -75,8 +75,10 @@ class Sales extends CI_Controller
         // End
 
         $booking = 1;
+        $kode_booking = $this->M_Sales->kode_booking();
         $data = [
             'is_booking'    => htmlspecialchars($booking, true),
+            'kode_booking'  => htmlspecialchars($kode_booking, true),
             'sales'         => htmlspecialchars($data['user']['name'], true),
         ];
         $this->db->where('id', $id);
@@ -93,12 +95,12 @@ class Sales extends CI_Controller
     public function cancelBooking($id)
     {
         $cancel = 0;
-        $sold = 0;
         $sales = '';
+        $kode_booking = '';
         $data = [
-            'is_booking' => $cancel,
-            'is_sold' => $sold,
-            'sales' => $sales
+            'is_booking'    => htmlspecialchars($cancel, true),
+            'kode_sold'     => htmlspecialchars($kode_booking, true),
+            'sales'         => htmlspecialchars($sales, true)
         ];
         $this->db->where('id', $id);
         $this->db->update('deal_stok', $data);
@@ -114,8 +116,10 @@ class Sales extends CI_Controller
     public function sold($id)
     {
         $sold = 1;
+        $kode_sold = $this->M_Sales->kode_sold();
         $data = [
-            'is_sold' => $sold
+            'kode_sold' => htmlspecialchars($kode_sold, true),
+            'is_sold'   => htmlspecialchars($sold, true)
         ];
         $this->db->where('id', $id);
         $this->db->update('deal_stok', $data);

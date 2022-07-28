@@ -26,22 +26,37 @@ class M_Sales extends CI_Model
         return $this->db->get()->result_array();
     }
 
-    public function input_booking()
+    public function kode_booking()
     {
+        $this->db->select('RIGHT(deal_stok.kode_booking,2) as kode_booking', FALSE);
+        $this->db->order_by('kode_booking', 'DESC');
+        $this->db->limit(1);
+        $query = $this->db->get('deal_stok');
+        if ($query->num_rows() <> 0) {
+            $data = $query->row();
+            $kode = intval($data->kode_po) + 1;
+        } else {
+            $kode = 1;
+        }
+        $generate = str_pad($kode, 2, "0", STR_PAD_LEFT);
+        $getKode = "BK" . date('j') . date('n') . date('y') . $generate;
+        return $getKode;
+    }
 
-        $id = $this->uri->segment('3');
-
-        //  Pengambilan data untuk Sales 
-        $data['user'] = $this->db->get_where('tb_user', ['no_pegawai' =>
-        $this->session->userdata('no_pegawai')])->row_array();
-        // End
-
-        $booking = 1;
-        $data = [
-            'is_booking'    => htmlspecialchars($booking, true),
-            'sales'         => htmlspecialchars($data['user']['name'], true),
-        ];
-        $this->db->where('id', $id);
-        $this->db->iupdate('deal_stok', $data);
+    public function kode_sold()
+    {
+        $this->db->select('RIGHT(deal_stok.kode_sold,2) as kode_sold', FALSE);
+        $this->db->order_by('kode_sold', 'DESC');
+        $this->db->limit(1);
+        $query = $this->db->get('deal_stok');
+        if ($query->num_rows() <> 0) {
+            $data = $query->row();
+            $kode = intval($data->kode_po) + 1;
+        } else {
+            $kode = 1;
+        }
+        $generate = str_pad($kode, 2, "0", STR_PAD_LEFT);
+        $getKode = "BK" . date('j') . date('n') . date('y') . $generate;
+        return $getKode;
     }
 }
