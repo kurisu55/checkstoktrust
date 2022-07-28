@@ -60,9 +60,10 @@ class Tnt extends CI_Controller
         } else {
             $this->_input_stok();
             $kode_po = $this->M_Tnt->kode_po();
+            $confirm = 1;
             $data = [
-                'is_confirm' => '1',
-                'kode_po' => $kode_po
+                'is_confirm'    => htmlspecialchars($confirm, true),
+                'kode_po'       => htmlspecialchars($kode_po, true)
             ];
             $this->db->where('id', $id);
             $this->db->update('update_po', $data);

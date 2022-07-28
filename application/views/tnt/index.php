@@ -36,10 +36,19 @@
                         <td><?= $l_po['appraiser']; ?></td>
                         <td>
                             <form action="<?= base_url('Tnt/confirm_PO/') . $l_po['id']; ?>" method="post" onsubmit="if(!confirm('Ingin mengirim PO ke Sales dengan tipe mobil <?= $l_po['tipe_mobil']; ?> dan plat mobil <?= $l_po['plat_mobil']; ?>?')){return false;}">
-                                <button type="submit" class="badge badge-success" style="border: none;">Deal</button>
+                                <?php if ($l_po['is_confirm'] == 0) {
+                                    echo  "<button type='submit' class='badge badge-success' style='border: none;'>Deal</button>";
+                                } else {
+                                    echo  "<button type='submit' class='badge badge-success invisible' style='border: none;'>Deal</button>"
+                                        . "<i class='fas fa-regular fa-check-to-slot fa-2x text-success'></i>";
+                                }
+                                ?>
                             </form>
                             <form action="<?= base_url('tnt/delete_po/'); ?><?= $l_po['id']; ?>" method="POST" onsubmit="if(!confirm('Ingin menghapus PO dengan tipe mobil <?= $l_po['tipe_mobil']; ?> dan plat mobil <?= $l_po['plat_mobil']; ?>?')){return false;}">
-                                <button class="badge badge-danger" style="border: none;">Batal</button>
+                                <?php if ($l_po['is_confirm'] == 0) {
+                                    echo "<button class='badge badge-danger' style='border: none;'>Batal</button>";
+                                }
+                                ?>
                             </form>
                         </td>
                     </tr>
