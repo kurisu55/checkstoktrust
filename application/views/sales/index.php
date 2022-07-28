@@ -53,13 +53,38 @@
                             <td><?= $d['appraiser']; ?></td>
                             <td>
                                 <form action="<?= base_url('sales/booking/') . $d['id']; ?>" onsubmit="if(!confirm('Ingin melakukan booking dengan tipe mobil <?= $d['tipe_mobil']; ?> dan plat mobil <?= $d['plat_mobil']; ?>?')){return false;}">
-                                    <button type="submit" id="booking" class="badge badge-warning" data-toggle="toggle" title="Booking" style="border: none;">Booking</button>
+                                    <?php if ($d['is_booking'] == 1 && $d['is_sold'] == 1) {
+                                        echo "<button type='submit' id='booking' class='badge badge-warning' data-toggle='toggle' title='Booking' style='border: none;' hidden>Booking</button>"
+                                            . "<span class='text-white bg-info'>Clear</span>";
+                                    } elseif ($d['is_booking'] == 0) {
+                                        echo "<button type='submit' id='booking' class='badge badge-warning' data-toggle='toggle' title='Booking' style='border: none;'>Booking</button>";
+                                    }
+                                    ?>
                                 </form>
                                 <form action="<?= base_url('sales/cancelBooking/') . $d['id']; ?>" onsubmit="if(!confirm('Ingin melakukan pembatalan booking dengan tipe mobil <?= $d['tipe_mobil']; ?> dan plat mobil <?= $d['plat_mobil']; ?>?')){return false;}">
-                                    <button type="submit" id="cancel" class="badge badge-danger" data-toggle="toggle" title="Cancel" style="border: none;">Cancel</button>
+                                    <?php if ($d['is_booking'] == 1 && $d['is_sold'] == 1) {
+                                        echo "<button type='submit' id='cancel' class='badge badge-danger' data-toggle='toggle' title='Cancel' style='border: none;' hidden>Cancel</button>";
+                                    } elseif ($d['is_booking'] == 1 && $user['name'] != $d['sales']) {
+                                        echo "<button type='submit' id='cancel' class='badge badge-danger' data-toggle='toggle' title='Cancel' style='border: none;' hidden>Cancel</button>";
+                                    } elseif ($d['is_booking'] == 1) {
+                                        echo "<button type='submit' id='cancel' class='badge badge-danger' data-toggle='toggle' title='Cancel' style='border: none;'>Cancel</button>";
+                                    } elseif ($d['is_booking'] == 0) {
+                                        echo "<button type='submit' id='cancel' class='badge badge-danger' data-toggle='toggle' title='Cancel' style='border: none;' hidden>Cancel</button>";
+                                    }
+                                    ?>
                                 </form>
                                 <form action="<?= base_url('sales/sold/') . $d['id']; ?>" onsubmit="if(!confirm('Stok yang Anda booking dinyatakan terjual?')){return false;}">
-                                    <button type="submit" id="terjual" class="badge badge-success" data-toggle="toggle" title="Terjual" style="border: none;">Terjual</button>
+                                    <?php if ($d['is_booking'] == 1 && $d['is_sold'] == 1) {
+                                        echo "<button type='submit' id='terjual' class='badge badge-success' data-toggle='toggle' title='Terjual' style='border: none;' hidden>Terjual</button>";
+                                    } elseif ($d['is_booking'] == 1 && $user['name'] != $d['sales']) {
+                                        echo "<button type='submit' id='terjual' class='badge badge-success' data-toggle='toggle' title='Terjual' style='border: none;' hidden>Terjual</button>";
+                                    } elseif ($d['is_booking'] == 1) {
+                                        echo "<button type='submit' id='terjual' class='badge badge-success' data-toggle='toggle' title='Terjual' style='border: none;'>Terjual</button>";
+                                    } elseif ($d['is_booking'] == 0) {
+                                        echo "<button type='submit' id='terjual' class='badge badge-success' data-toggle='toggle' title='Terjual' style='border: none;' hidden>Terjual</button>";
+                                    }
+
+                                    ?>
                                 </form>
                             </td>
                             <?php
