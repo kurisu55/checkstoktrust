@@ -30,6 +30,9 @@ class M_User extends CI_Model
 
     public function getUserByNRP($no_pegawai)
     {
+        $nama_role = 'Administrator';
+        $this->db->join('tb_roleid', 'tb_roleid.role_id = tb_user.role_id');
+        $this->db->where('nama_role !=', $nama_role);
         return $this->db->get_where('tb_user', ['no_pegawai' => $no_pegawai])->row_array();
     }
 
@@ -42,10 +45,10 @@ class M_User extends CI_Model
             $role_id = '3';
         }
         $data = [
-            'name'      => $this->input->post('name'),
-            'role_id'   => $role_id,
-            'region'    => $this->input->post('region'),
-            'no_telp'   => $this->input->post('no_telp')
+            'name'      => htmlspecialchars($this->input->post('name'), true),
+            'role_id'   => htmlspecialchars($role_id, true),
+            'region'    => htmlspecialchars($this->input->post('region'), true),
+            'no_telp'   => htmlspecialchars($this->input->post('no_telp'), true)
         ];
         $this->db->where('no_pegawai', $no_pegawai);
         $this->db->update('tb_user', $data);
@@ -65,13 +68,13 @@ class M_User extends CI_Model
     public function inpuData_PO()
     {
         $data = [
-            'tgl_po'        => $this->input->post('tgl_po'),
-            'brand'         => $this->input->post('brand'),
-            'tipe_mobil'    => $this->input->post('tipe_mobil'),
-            'plat_mobil'    => $this->input->post('plat_mobil'),
-            'tahun'         => $this->input->post('tahun'),
-            'warna'         => $this->input->post('warna'),
-            'appraiser'     => $this->input->post('appraiser')
+            'tgl_po'        => htmlspecialchars($this->input->post('tgl_po'), true),
+            'brand'         => htmlspecialchars($this->input->post('brand'), true),
+            'tipe_mobil'    => htmlspecialchars($this->input->post('tipe_mobil'), true),
+            'plat_mobil'    => htmlspecialchars($this->input->post('plat_mobil'), true),
+            'tahun'         => htmlspecialchars($this->input->post('tahun'), true),
+            'warna'         => htmlspecialchars($this->input->post('warna'), true),
+            'appraiser'     => htmlspecialchars($this->input->post('appraiser'), true)
         ];
         $this->db->insert('update_po', $data);
     }

@@ -47,8 +47,8 @@
                             <td><?= $d_user['region']; ?></td>
                             <td><?= $d_user['no_telp']; ?></td>
                             <td>
-                                <a href="<?= base_url('admin/edit_data/'); ?><?= $d_user['no_pegawai']; ?>" class="badge badge-warning">Edit</a>
-                                <a href="<?= base_url('admin/delete_user/'); ?><?= $d_user['no_pegawai']; ?>" class="badge badge-danger" onclick="return confirm('Ingin menghapus user atas nama <?= $d_user['name']; ?> dengan NRP <?= $d_user['no_pegawai']; ?>?')">Delete</a>
+                                <a href="<?= base_url('admin/edit_data/') . $d_user['no_pegawai']; ?>" class="badge badge-warning">Edit</a>
+                                <a href="<?= base_url('admin/delete_user/') . $d_user['no_pegawai']; ?>" class="badge badge-danger" onclick="return confirm('Ingin menghapus user atas nama <?= $d_user['name']; ?> dengan NRP <?= $d_user['no_pegawai']; ?>?')">Delete</a>
                             </td>
                         </tr>
                         <?php $i++ ?>

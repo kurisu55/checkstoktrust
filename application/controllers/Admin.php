@@ -54,7 +54,7 @@ class Admin extends CI_Controller
         $this->session->userdata('no_pegawai')])->row_array();
         /** End */
 
-        $data['title'] = 'Profile';
+        $data['title'] = 'Admin Profile';
         $this->load->view('Template/User_header', $data);
         $this->load->view('Template/User_sidebar', $data);
         $this->load->view('Template/User_topbar', $data);
@@ -92,7 +92,7 @@ class Admin extends CI_Controller
 
         /** Data variabel request */
         $data['daftar_user'] = $this->M_User->getUserByNRP($no_pegawai);
-        $data['jabatan'] = ['Sales', 'TNT'];
+        $data['jabatan'] = ['TNT', 'Sales'];
         $data['region'] = ['Kalimalang', 'Bogor', 'Bandung', 'Bintaro', 'Surabaya', 'Medan'];
         $data['title'] = 'Ubah Data User';
         /**~~~~~*/
