@@ -62,8 +62,7 @@
                                 </form>
                                 <form action="<?= base_url('sales/cancelBooking/') . $d['id']; ?>" onsubmit="if(!confirm('Ingin melakukan pembatalan booking dengan tipe mobil <?= $d['tipe_mobil']; ?> dan plat mobil <?= $d['plat_mobil']; ?>?')){return false;}">
                                     <?php if ($d['is_booking'] == 1 && $d['is_sold'] == 1) {
-                                        echo "<button type='submit' id='cancel' class='badge badge-danger' data-toggle='toggle' title='Cancel' style='border: none;' hidden>Cancel</button>"
-                                            . "<span class='btn btn-info rounded mt-2 disabled'>Clear</span>";
+                                        echo "<span class='btn btn-info rounded mt-1 disabled'>Clear</span>";
                                     } elseif ($d['is_booking'] == 1 && $user['name'] != $d['sales']) {
                                         echo "<button type='submit' id='cancel' class='badge badge-danger' data-toggle='toggle' title='Cancel' style='border: none;' hidden>Cancel</button>";
                                     } elseif ($d['is_booking'] == 1) {
@@ -89,9 +88,9 @@
                             </td>
                             <?php
                             if ($d['is_sold'] == 1 && $d['is_booking'] == 1) {
-                                echo "<td class='bg-success'><span class='text-white'>Stok sudah terjual</span>";
+                                echo "<td class='bg-success rounded'><span class='text-white'>Stok sudah terjual</span>";
                             } elseif ($d['is_booking'] == 1) {
-                                echo "<td class='bg-warning'><span class='text-white'>Sudah dibooking sales <u>" . $d['sales'] . "</u></span>";
+                                echo "<td class='bg-warning rounded'><span class='text-white'>Sudah dibooking sales <u>" . $d['sales'] . "</u></span>";
                             }
                             ?>
                             </td>
