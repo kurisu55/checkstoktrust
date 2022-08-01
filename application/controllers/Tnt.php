@@ -58,7 +58,6 @@ class Tnt extends CI_Controller
         if ($this->form_validation->run() == true) {
             $this->index();
         } else {
-            $this->_input_stok();
             $kode_po = $this->M_Tnt->kode_po();
             $confirm = 1;
             $data = [
@@ -67,6 +66,7 @@ class Tnt extends CI_Controller
             ];
             $this->db->where('id', $id);
             $this->db->update('update_po', $data);
+            $this->_input_stok();
             $this->session->set_flashdata('pesan', '<div class="alert alert-success alert-dismissible fade show" role="alert">
                 <strong>Berhasil!</strong> Purchase Order sudah dikirim ke Sales.
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
