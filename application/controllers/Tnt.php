@@ -62,7 +62,8 @@ class Tnt extends CI_Controller
             $confirm = 1;
             $data = [
                 'is_confirm'    => htmlspecialchars($confirm, true),
-                'kode_po'       => htmlspecialchars($kode_po, true)
+                'kode_po'       => htmlspecialchars($kode_po, true),
+                'date_confirm'  => time()
             ];
             $this->db->where('id', $id);
             $this->db->update('update_po', $data);

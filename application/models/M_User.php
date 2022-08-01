@@ -78,4 +78,15 @@ class M_User extends CI_Model
         ];
         $this->db->insert('update_po', $data);
     }
+
+    public function list_mobilMasuk()
+    {
+        $this->db->where('is_confirm', 1);
+        return $this->db->get('update_po')->result_array();
+    }
+    public function list_mobilKeluar()
+    {
+        $this->db->where('is_sold', 1);
+        return $this->db->get('deal_stok')->result_array();
+    }
 }
