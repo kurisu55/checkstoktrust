@@ -128,4 +128,58 @@ class Admin extends CI_Controller
         </div>');
         redirect('admin/data_profile');
     }
+    public function mobil_masuk()
+    {
+        /** Pengambilan data berdasarkan Nomor pegawai */
+        $data['user'] = $this->db->get_where('tb_user', ['no_pegawai' =>
+        $this->session->userdata('no_pegawai')])->row_array();
+        /** End */
+
+        $data['list_mobilMasuk'] = $this->M_User->list_mobilMasuk();
+
+        $data['title'] = 'Mobil Masuk';
+
+        $this->load->view('Template/User_header', $data);
+        $this->load->view('Template/User_sidebar', $data);
+        $this->load->view('Template/User_topbar', $data);
+        $this->load->view('admin/report/mobil_masuk', $data);
+        $this->load->view('Template/User_footer');
+    }
+    public function mobil_keluar()
+    {
+        /** Pengambilan data berdasarkan Nomor pegawai */
+        $data['user'] = $this->db->get_where('tb_user', ['no_pegawai' =>
+        $this->session->userdata('no_pegawai')])->row_array();
+        /** End */
+
+        $data['list_mobilKeluar'] = $this->M_User->list_mobilKeluar();
+
+        $data['title'] = 'Mobil Keluar';
+
+        $this->load->view('Template/User_header', $data);
+        $this->load->view('Template/User_sidebar', $data);
+        $this->load->view('Template/User_topbar', $data);
+        $this->load->view('admin/report/mobil_keluar', $data);
+        $this->load->view('Template/User_footer');
+    }
+
+    public function pdf_mobilMasuk()
+    {
+        $data['list_mobilMasuk'] = $this->M_User->list_mobilMasuk();
+        $data['title'] = 'Mobil Masuk';
+
+        $this->load->library('pdf');
+        $this->pdf->setPaper('A4', 'potrait');
+        $this->pdf->load_view('admin/report/pdf_mobilMasuk', $data);
+    }
+
+    public function pdf_mobiKeluar()
+    {
+        $data['list_mobilKeluar'] = $this->M_User->list_mobilKeluar();
+        $data['title'] = 'Mobil Keluar';
+
+        $this->load->library('pdf');
+        $this->pdf->setPaper('A4', 'potrait');
+        $this->pdf->load_view('admin/report/pdf_mobilKeluar', $data);
+    }
 }

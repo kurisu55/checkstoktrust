@@ -119,7 +119,8 @@ class Sales extends CI_Controller
         $kode_sold = $this->M_Sales->kode_sold();
         $data = [
             'kode_sold' => htmlspecialchars($kode_sold, true),
-            'is_sold'   => htmlspecialchars($sold, true)
+            'is_sold'   => htmlspecialchars($sold, true),
+            'date_sold' => time()
         ];
         $this->db->where('id', $id);
         $this->db->update('deal_stok', $data);
