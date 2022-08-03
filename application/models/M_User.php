@@ -89,4 +89,13 @@ class M_User extends CI_Model
         $this->db->where('is_sold', 1);
         return $this->db->get('deal_stok')->result_array();
     }
+
+    public function filter_mobilMasuk($tgl_awal, $tgl_akhir)
+    {
+        $this->db->select('*');
+        $this->db->from('update_po');
+        $this->db->where('date_confirm >=', $tgl_awal);
+        $this->db->where('date_confirm <=', $tgl_akhir);
+        return $this->db->get()->result_array();
+    }
 }

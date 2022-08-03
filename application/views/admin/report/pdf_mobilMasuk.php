@@ -8,8 +8,26 @@
     <title><?= $title ?></title>
     <style type="text/css">
         body {
-            text-align: center;
+            font-family: sans-serif;
+            font-size: 16px;
+        }
 
+        footer {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 1030;
+        }
+
+        .kolom {
+            background-color: #2596be;
+            color: #ffffff;
+            text-align: center;
+        }
+
+        .baris {
+            text-align: center;
         }
 
         table,
@@ -22,31 +40,63 @@
 </head>
 
 <body>
-    <h2>Laporan Mobil Masuk</h2>
-    <table class="table table-hover" border="1" cellspacing="0">
+    <h2 style="text-align: center;">Laporan Mobil Masuk</h2>
+    <table border="1" cellspacing="0">
         <thead>
-            <tr class="bg-success text-white">
+            <tr class="kolom">
                 <th scope="col">#</th>
-                <th scope="col">Kode PO</th>
-                <th scope="col">Waktu Deal</th>
+                <th scope="col">Tanggal Deal</th>
+                <th scope="col">Tanggal PO</th>
                 <th scope="col">Brand</th>
+                <th scope="col">Tipe Mobil</th>
                 <th scope="col">Plat Mobil</th>
+                <th scope="col">Tahun</th>
+                <th scope="col">Warna</th>
             </tr>
         </thead>
         <tbody>
             <?php $i = 1; ?>
             <?php foreach ($list_mobilMasuk as $rows) : ?>
-                <tr>
+                <tr class="baris">
                     <th scope="row"><?= $i; ?></th>
-                    <td><?= $rows['kode_po']; ?></td>
-                    <td><?= date('d F Y', $rows['date_confirm']); ?></td>
+                    <td><?= $rows['date_confirm'] ?></td>
+                    <td><?= $rows['tgl_po']; ?></td>
                     <td><?= $rows['brand']; ?></td>
+                    <td><?= $rows['tipe_mobil']; ?></td>
                     <td><?= $rows['plat_mobil']; ?></td>
+                    <td><?= $rows['tahun']; ?></td>
+                    <td><?= $rows['warna']; ?></td>
                 </tr>
                 <?php $i++; ?>
             <?php endforeach; ?>
         </tbody>
     </table>
+
+
+
+    <!-- <footer>
+        <sup><strong>*</strong></sup>PDF ini dicetak pada waktu
+        <?php /*date_default_timezone_set('Asia/Jakarta');
+        date('l');
+        if (date('l') == 'Sunday') {
+            echo 'Minggu, ';
+        } elseif (date('l') == 'Monday') {
+            echo 'Senin, ';
+        } elseif (date('l') == 'Tuesday') {
+            echo 'Selasa, ';
+        } elseif (date('l') == 'Wednesday') {
+            echo 'Rabu, ';
+        } elseif (date('l') == 'Thursday') {
+            echo 'Kamis, ';
+        } elseif (date('l') == 'Friday') {
+            echo 'Jumat, ';
+        } elseif (date('l') == 'Saturday') {
+            echo 'Sabtu, ';
+        }
+        echo date('h:i:s A');
+
+        */ ?>
+    </footer> -->
     <!-- /.container-fluid -->
     </div>
     <!-- End of Main Content -->
