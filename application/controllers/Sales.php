@@ -117,10 +117,12 @@ class Sales extends CI_Controller
     {
         $sold = 1;
         $kode_sold = $this->M_Sales->kode_sold();
+        date_default_timezone_set('Asia/Jakarta');
+        $tanggal = date('Y-m-d');
         $data = [
             'kode_sold' => htmlspecialchars($kode_sold, true),
             'is_sold'   => htmlspecialchars($sold, true),
-            'date_sold' => time()
+            'date_sold' => $tanggal = date('Y-m-d', strtotime($tanggal))
         ];
         $this->db->where('id', $id);
         $this->db->update('deal_stok', $data);
