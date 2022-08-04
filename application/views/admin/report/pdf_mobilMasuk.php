@@ -12,6 +12,11 @@
             font-size: 16px;
         }
 
+        img {
+            width: 200px;
+            height: 100px;
+        }
+
         footer {
             position: fixed;
             right: 0;
@@ -36,10 +41,27 @@
         th {
             padding: 10px;
         }
+
+        .alamat {
+            float: right;
+            margin-top: 20px;
+
+        }
+
+        p {
+            line-height: 50%;
+        }
     </style>
 </head>
 
 <body>
+    <img src="<?= base_url('assets/images/') ?>Toyota-Trust-1-1024x460.png" alt="Logo Trust Toyota">
+    <div class="alamat">
+        <p>Jl. Raya Kalimalang No.88</p>
+        <p>RT.1/RW.7</p>
+        <p>Duren Sawit, Jakarta Timur</p>
+    </div>
+    <hr>
     <h2 style="text-align: center;">Laporan Mobil Masuk</h2>
     <table border="1" cellspacing="0">
         <thead>
