@@ -7,8 +7,8 @@
         <div class="col-lg">
             <form action="<?= base_url('admin/mobil_masuk') ?>" method="post">
                 <div class="row mb-2">
-                    <input type="text" name="tgl_awal" class="form-control col-2 ml-2" placeholder="Tanggal Awal" onfocus="(this.type='date')">
-                    <input type="text" name="tgl_akhir" class="form-control col-2 ml-2" placeholder="Tanggal Akhir" onfocus="(this.type='date')">
+                    <input type="text" name="tgl_awal" class="form-control col-2 ml-2" placeholder="Tanggal Awal" onfocus="(this.type='date')" value="<?= set_value('tgl_awal'); ?>">
+                    <input type="text" name="tgl_akhir" class="form-control col-2 ml-2" placeholder="Tanggal Akhir" onfocus="(this.type='date')" value="<?= set_value('tgl_akhir'); ?>">
                     <button type="submit" class="btn btn-info ml-2"><i class="fas fa-filter mr-1"></i>Filter</button>
             </form>
             <a href="<?= base_url('admin/refresh') ?>" class="btn btn-success ml-2"><i class="fas fa-refresh mr-1"></i>Refresh</a>

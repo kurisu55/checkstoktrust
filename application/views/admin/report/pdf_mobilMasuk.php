@@ -45,7 +45,7 @@
         <thead>
             <tr class="kolom">
                 <th scope="col">#</th>
-                <th scope="col">Tanggal Deal</th>
+                <th scope="col">Tanggal Mobil Masuk</th>
                 <th scope="col">Tanggal PO</th>
                 <th scope="col">Brand</th>
                 <th scope="col">Tipe Mobil</th>
