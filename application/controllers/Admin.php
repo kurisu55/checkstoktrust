@@ -165,9 +165,20 @@ class Admin extends CI_Controller
         $this->session->userdata('no_pegawai')])->row_array();
         /** End */
 
-        $data['list_mobilKeluar'] = $this->M_User->list_mobilKeluar();
+        $tgl_awal = $this->input->post('tgl_awal');
+        $tgl_akhir = $this->input->post('tgl_akhir');
 
-        $data['title'] = 'Mobil Keluar';
+        $this->session->set_userdata('tgl_awal', $tgl_awal);
+        $this->session->set_userdata('tgl_akhir', $tgl_akhir);
+
+
+        if (empty($tgl_awal) || empty($tgl_akhir)) {
+            $data['list_mobilKeluar'] = $this->M_User->list_mobilKeluar();
+            $data['title'] = 'Mobil Keluar';
+        } else {
+            $data['title'] = 'Mobil Keluar';
+            $data['list_mobilKeluar'] = $this->M_User->filter_mobilKeluar($tgl_awal, $tgl_akhir);
+        }
 
         $this->load->view('Template/User_header', $data);
         $this->load->view('Template/User_sidebar', $data);
@@ -192,6 +203,22 @@ class Admin extends CI_Controller
         $this->load->view('Template/User_footer');
     }
 
+    public function refresh2()
+    {
+        /** Pengambilan data berdasarkan Nomor pegawai */
+        $data['user'] = $this->db->get_where('tb_user', ['no_pegawai' =>
+        $this->session->userdata('no_pegawai')])->row_array();
+        /** End */
+
+        $data['list_mobilKeluar'] = $this->M_User->list_mobilKeluar();
+        $data['title'] = 'Mobil Keluar';
+        $this->load->view('Template/User_header', $data);
+        $this->load->view('Template/User_sidebar', $data);
+        $this->load->view('Template/User_topbar', $data);
+        $this->load->view('admin/report/mobil_keluar', $data);
+        $this->load->view('Template/User_footer');
+    }
+
     public function pdf_mobilMasuk()
     {
         if (empty($this->session->userdata('tgl_awal')) || empty($this->session->userdata('tgl_awal'))) {
@@ -212,11 +239,21 @@ class Admin extends CI_Controller
         $this->pdf->load_view('admin/report/pdf_mobilMasuk', $data);
     }
 
-    public function pdf_mobiKeluar()
+    public function pdf_mobilKeluar()
     {
-        $data['list_mobilKeluar'] = $this->M_User->list_mobilKeluar();
-        $data['title'] = 'Mobil Keluar';
-
+        if (empty($this->session->userdata('tgl_awal')) || empty($this->session->userdata('tgl_awal'))) {
+            $data['list_mobilKeluar'] = $this->M_User->list_mobilKeluar();
+            $data['title'] = 'Laporan Mobil Keluar';
+            $this->load->library('pdf');
+            $this->pdf->setPaper('A4', 'potrait');
+            $this->pdf->load_view('admin/report/pdf_mobilKeluar', $data);
+        } else {
+            $data['list_mobilKeluar'] = $this->M_User->filter_mobilKeluar($this->session->userdata('tgl_awal'), $this->session->userdata('tgl_akhir'));
+            $data['title'] = 'Laporan Mobil Keluar';
+            $this->load->library('pdf');
+            $this->pdf->setPaper('A4', 'potrait');
+            $this->pdf->load_view('admin/report/pdf_mobilKeluar', $data);
+        }
         $this->load->library('pdf');
         $this->pdf->setPaper('A4', 'potrait');
         $this->pdf->load_view('admin/report/pdf_mobilKeluar', $data);

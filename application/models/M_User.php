@@ -98,4 +98,13 @@ class M_User extends CI_Model
         $this->db->where('date_confirm <=', $tgl_akhir);
         return $this->db->get()->result_array();
     }
+
+    public function filter_mobilKeluar($tgl_awal, $tgl_akhir)
+    {
+        $this->db->select('*');
+        $this->db->from('deal_stok');
+        $this->db->where('date_sold >=', $tgl_awal);
+        $this->db->where('date_sold <=', $tgl_akhir);
+        return $this->db->get()->result_array();
+    }
 }
