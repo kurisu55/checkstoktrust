@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @package dompdf
  * @link    http://dompdf.github.com/
@@ -7,6 +8,7 @@
  * @author  Fabien Ménager <fabien.menager@gmail.com>
  * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
  */
+
 namespace Dompdf\Image;
 
 use Dompdf\Options;
@@ -42,7 +44,7 @@ class Cache
     public static $broken_image = "data:image/svg+xml;charset=utf8,%3C?xml version='1.0'?%3E%3Csvg width='64' height='64' xmlns='http://www.w3.org/2000/svg'%3E%3Cg%3E%3Crect stroke='%23666666' id='svg_1' height='60.499994' width='60.166667' y='1.666669' x='1.999998' stroke-width='1.5' fill='none'/%3E%3Cline stroke-linecap='null' stroke-linejoin='null' id='svg_3' y2='59.333253' x2='59.749916' y1='4.333415' x1='4.250079' stroke-width='1.5' stroke='%23999999' fill='none'/%3E%3Cline stroke-linecap='null' stroke-linejoin='null' id='svg_4' y2='59.999665' x2='4.062838' y1='3.750342' x1='60.062164' stroke-width='1.5' stroke='%23999999' fill='none'/%3E%3C/g%3E%3C/svg%3E";
 
     public static $error_message = "Image not found or type unknown";
-    
+
     /**
      * Resolve and fetch an image for use.
      *
@@ -61,7 +63,7 @@ class Cache
         $resolved_url = null;
         $type = null;
         $message = null;
-        
+
         try {
             $full_url = Helpers::build_url($protocol, $host, $base_path, $url);
 
@@ -72,7 +74,7 @@ class Cache
             $parsed_url = Helpers::explode_url($full_url);
             $protocol = strtolower($parsed_url["protocol"]);
             $is_data_uri = strpos($protocol, "data:") === 0;
-            
+
             if (!$is_data_uri) {
                 $allowed_protocols = $options->getAllowedProtocols();
                 if (!array_key_exists($protocol, $allowed_protocols)) {
@@ -126,7 +128,7 @@ class Cache
 
             list($width, $height, $type) = Helpers::dompdf_getimagesize($resolved_url, $options->getHttpContext());
 
-            if (($width && $height && in_array($type, ["gif", "png", "jpeg", "bmp", "svg","webp"], true)) === false) {
+            if (($width && $height && in_array($type, ["gif", "png", "jpeg", "bmp", "svg", "webp"], true)) === false) {
                 throw new ImageException("Image type unknown", E_WARNING);
             }
 
@@ -153,7 +155,7 @@ class Cache
                     },
                     false
                 );
-        
+
                 if (($fp = fopen($resolved_url, "r")) !== false) {
                     while ($line = fread($fp, 8192)) {
                         xml_parse($parser, $line, false);
@@ -241,7 +243,7 @@ class Cache
 
     static function detect_type($file, $context = null)
     {
-        list(, , $type) = Helpers::dompdf_getimagesize($file, $context);
+        list(,, $type) = Helpers::dompdf_getimagesize($file, $context);
 
         return $type;
     }
