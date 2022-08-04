@@ -226,12 +226,18 @@ class Admin extends CI_Controller
             $data['title'] = 'Laporan Mobil Masuk';
             $this->load->library('pdf');
             $this->pdf->setPaper('A4', 'potrait');
+            /** Menampilkan gambar pada pdf*/
+            $this->pdf->set_option('isRemoteEnabled', true);
+            /*End*/
             $this->pdf->load_view('admin/report/pdf_mobilMasuk', $data);
         } else {
             $data['list_mobilMasuk'] = $this->M_User->filter_mobilMasuk($this->session->userdata('tgl_awal'), $this->session->userdata('tgl_akhir'));
             $data['title'] = 'Laporan Mobil Masuk';
             $this->load->library('pdf');
             $this->pdf->setPaper('A4', 'potrait');
+            /** Menampilkan gambar pada pdf*/
+            $this->pdf->set_option('isRemoteEnabled', true);
+            /*End*/
             $this->pdf->load_view('admin/report/pdf_mobilMasuk', $data);
         }
         $this->load->library('pdf');
@@ -246,12 +252,18 @@ class Admin extends CI_Controller
             $data['title'] = 'Laporan Mobil Keluar';
             $this->load->library('pdf');
             $this->pdf->setPaper('A4', 'potrait');
+            /** Menampilkan gambar pada pdf*/
+            $this->pdf->set_option('isRemoteEnabled', true);
+            /*End*/
             $this->pdf->load_view('admin/report/pdf_mobilKeluar', $data);
         } else {
             $data['list_mobilKeluar'] = $this->M_User->filter_mobilKeluar($this->session->userdata('tgl_awal'), $this->session->userdata('tgl_akhir'));
             $data['title'] = 'Laporan Mobil Keluar';
             $this->load->library('pdf');
             $this->pdf->setPaper('A4', 'potrait');
+            /** Menampilkan gambar pada pdf*/
+            $this->pdf->set_option('isRemoteEnabled', true);
+            /*End*/
             $this->pdf->load_view('admin/report/pdf_mobilKeluar', $data);
         }
         $this->load->library('pdf');
