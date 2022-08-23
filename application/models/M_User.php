@@ -69,6 +69,7 @@ class M_User extends CI_Model
     {
         $data = [
             'tgl_po'        => htmlspecialchars($this->input->post('tgl_po'), true),
+            'kode_po'       => htmlspecialchars($this->kode_po(), true),
             'brand'         => htmlspecialchars($this->input->post('brand'), true),
             'tipe_mobil'    => htmlspecialchars($this->input->post('tipe_mobil'), true),
             'plat_mobil'    => htmlspecialchars($this->input->post('plat_mobil'), true),
@@ -77,6 +78,23 @@ class M_User extends CI_Model
             'appraiser'     => htmlspecialchars($this->input->post('appraiser'), true)
         ];
         $this->db->insert('update_po', $data);
+    }
+
+    public function kode_po()
+    {
+        $this->db->select('RIGHT(update_po.kode_po,2) as kode_po', FALSE);
+        $this->db->order_by('kode_po', 'DESC');
+        $this->db->limit(1);
+        $query = $this->db->get('update_po');
+        if ($query->num_rows() <> 0) {
+            $data = $query->row();
+            $kode = intval($data->kode_po) + 1;
+        } else {
+            $kode = 1;
+        }
+        $generate = str_pad($kode, 2, "0", STR_PAD_LEFT);
+        $getKode = "PO" . date('j') . date('n') . date('y') . $generate;
+        return $getKode;
     }
 
     public function list_mobilMasuk()
