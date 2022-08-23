@@ -14,6 +14,7 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Tanggal PO</th>
+                    <th scope="col">Kode PO</th>
                     <th scope="col">Brand</th>
                     <th scope="col">Tipe Mobil</th>
                     <th scope="col">Plat Mobil</th>
@@ -28,6 +29,7 @@
                     <tr>
                         <th scope="row"><?= $i; ?></th>
                         <td><?= $l_po['tgl_po']; ?></td>
+                        <td><?= $l_po['kode_po']; ?></td>
                         <td><?= $l_po['brand']; ?></td>
                         <td><?= $l_po['tipe_mobil']; ?></td>
                         <td><?= $l_po['plat_mobil']; ?></td>
@@ -63,6 +65,12 @@
                         <label for="tgl_po" class="col-sm-3 col-form-label">Tanggal PO</label>
                         <div class="col-sm-9">
                             <input type="date" name="tgl_po" id="tgl_po" class="form-control" value="<?= set_value('tgl_po'); ?>" autocomplete="off" required oninvalid="this.setCustomValidity('Input harus diisi')" oninput="setCustomValidity('')">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="kode_po" class="col-sm-3 col-form-label">Kode PO</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="kode_po" id="kode_po" class="form-control" value="<?= $kode_po ?>" disabled>
                         </div>
                     </div>
                     <div class="form-group row">

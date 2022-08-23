@@ -29,6 +29,7 @@ class Admin extends CI_Controller
 
         $data['list_PO'] = $this->M_User->get_listPO();
         $data['title'] = 'Buat Purchase Order';
+        $data['kode_po'] = $this->M_User->kode_po();
         if ($this->form_validation->run() == false) {
             $this->load->view('Template/User_header', $data);
             $this->load->view('Template/User_sidebar', $data);
@@ -36,7 +37,7 @@ class Admin extends CI_Controller
             $this->load->view('Admin/index', $data);
             $this->load->view('Template/User_footer');
         } else {
-            $data = $this->M_User->inpuData_PO();
+            $this->M_User->inpuData_PO();
             $this->session->set_flashdata('pesan', '<div class="alert alert-success alert-dismissible fade show" role="alert">
             <strong>Berhasil!</strong> Purchase Order telah dibuat.
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
