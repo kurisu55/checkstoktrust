@@ -9,23 +9,6 @@ class M_Tnt extends CI_Model
         return $this->db->get('update_po')->result_array();
     }
 
-    public function kode_po()
-    {
-        $this->db->select('RIGHT(update_po.kode_po,2) as kode_po', FALSE);
-        $this->db->order_by('kode_po', 'DESC');
-        $this->db->limit(1);
-        $query = $this->db->get('update_po');
-        if ($query->num_rows() <> 0) {
-            $data = $query->row();
-            $kode = intval($data->kode_po) + 1;
-        } else {
-            $kode = 1;
-        }
-        $generate = str_pad($kode, 2, "0", STR_PAD_LEFT);
-        $getKode = "PO" . date('j') . date('n') . date('y') . $generate;
-        return $getKode;
-    }
-
     public function delete($id)
     {
         $this->db->where('id', $id);

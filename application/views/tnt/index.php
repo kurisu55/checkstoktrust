@@ -13,6 +13,7 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Tanggal PO</th>
+                    <th scope="col">Kode PO</th>
                     <th scope="col">Brand</th>
                     <th scope="col">Tipe Mobil</th>
                     <th scope="col">Plat Mobil</th>
@@ -28,6 +29,7 @@
                     <tr>
                         <th scope="row"><?= $i; ?></th>
                         <td><?= $l_po['tgl_po']; ?></td>
+                        <td><?= $l_po['kode_po']; ?></td>
                         <td><?= $l_po['brand']; ?></td>
                         <td><?= $l_po['tipe_mobil']; ?></td>
                         <td><?= $l_po['plat_mobil']; ?></td>
